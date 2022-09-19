@@ -20,11 +20,6 @@ class Boardgame
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $boardgame;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $name;
 
     /**
@@ -45,18 +40,6 @@ class Boardgame
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getBoardgame(): ?string
-    {
-        return $this->boardgame;
-    }
-
-    public function setBoardgame(string $boardgame): self
-    {
-        $this->boardgame = $boardgame;
-
-        return $this;
     }
 
     public function getName(): ?string
