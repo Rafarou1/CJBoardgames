@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\BoardgameRepository;
+use App\Entity\Reserve;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
