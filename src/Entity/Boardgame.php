@@ -37,6 +37,12 @@ class Boardgame
      */
     private $year;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Reserve::class, inversedBy="boardgame")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $reserve;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +92,18 @@ class Boardgame
     public function setYear(int $year): self
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    public function getReserve(): ?Reserve
+    {
+        return $this->reserve;
+    }
+
+    public function setReserve(?Reserve $reserve): self
+    {
+        $this->reserve = $reserve;
 
         return $this;
     }

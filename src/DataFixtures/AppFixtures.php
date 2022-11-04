@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Boardgame;
+use App\Entity\Reserve;
 use App\Repository\BoardgameRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -24,14 +25,26 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+
+        $reserveRepo = $manager->getRepository(Reserve::class);
+
+        $reserve = new Reserve();
+        $reserve->setName("CJ");
+        $reserve->setDescription("La réserve du CJ à la Maisel");
+        $manager->persist($reserve);
+
+
+
+
         $boardgameRepo = $manager->getRepository(Boardgame::class);
 
         foreach (self::boardgameDataGenerator() as [$name, $type, $difficulty, $year] ) {
-            $boardgame = new boardgame();
+            $boardgame = new Boardgame();
             $boardgame->setName($name);
             $boardgame->setType($type);
             $boardgame->setDifficulty($difficulty);
             $boardgame->setYear($year);
+            $boardgame->setReserve($reserve);
             $manager->persist($boardgame);          
         }
         $manager->flush();
