@@ -35,6 +35,11 @@ class Reserve
      */
     private $name;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Player::class, mappedBy="reserve", cascade={"persist", "remove"})
+     */
+    private $player;
+
     public function __construct()
     {
         $this->boardgame = new ArrayCollection();
@@ -102,5 +107,22 @@ class Reserve
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getPlayer(): ?Player
+    {
+        return $this->player;
+    }
+
+    public function setPlayer(Player $player): self
+    {
+        // set the owning side of the relation if necessary
+        if ($player->getReserve() !== $this) {
+            $player->setReserve($this);
+        }
+
+        $this->player = $player;
+
+        return $this;
     }
 }
