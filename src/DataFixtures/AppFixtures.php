@@ -31,6 +31,8 @@ class AppFixtures extends Fixture
         $reserve = new Reserve();
         $reserve->setName("CJ");
         $reserve->setDescription("La réserve du CJ à la Maisel");
+        // $reserve->setCreated("");
+        // $reserve->setUpdated("");
         $manager->persist($reserve);
 
 
