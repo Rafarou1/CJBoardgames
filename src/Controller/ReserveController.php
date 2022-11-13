@@ -37,25 +37,6 @@ class ReserveController extends AbstractController
     ]);
     }
 
-//         $htmlpage = '<!DOCTYPE html>
-// <html>
-//     <head>
-//         <meta charset="UTF-8">
-//         <title>Welcome!</title>
-//     </head>
-//     <body>
-//         <h1>Welcome</h1>
-            
-//     <p>Bienvenue dans notre reserve</p>
-//     </body>
-// </html>';
-        
-        // return new Response(
-        //     $htmlpage,
-        //     Response::HTTP_OK,
-        //     array('content-type' => 'text/html')
-        //     );
-    // }
 
     /**
      * Lists all reserve entities.

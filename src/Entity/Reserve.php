@@ -41,25 +41,9 @@ class Reserve
      */
     private $player;
 
-    // /**
-    //  * @var \Datetime Date of creation
-    //  *
-    //  * @ORM\Column(name="created", type="datetime")
-    //  */
-    // private $created;
-    
-    // /**
-    //  * @var \Datetime Date of last modification
-    //  *
-    //  * @ORM\Column(name="updated", type="datetime")
-    //  */
-    // private $updated;
-
     public function __construct()
     {
         $this->boardgame = new ArrayCollection();
-        // $this->created = new \DateTime();
-        // $this->updated = new \DateTime();
 
     }
 
