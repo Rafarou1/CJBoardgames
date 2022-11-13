@@ -7,7 +7,7 @@ use App\Entity\Boardgame;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use DateTime;
+// use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=ReserveRepository::class)
@@ -41,25 +41,25 @@ class Reserve
      */
     private $player;
 
-    /**
-     * @var \Datetime Date of creation
-     *
-     * @ORM\Column(name="created", type="datetime")
-     */
-    private $created;
+    // /**
+    //  * @var \Datetime Date of creation
+    //  *
+    //  * @ORM\Column(name="created", type="datetime")
+    //  */
+    // private $created;
     
-    /**
-     * @var \Datetime Date of last modification
-     *
-     * @ORM\Column(name="updated", type="datetime")
-     */
-    private $updated;
+    // /**
+    //  * @var \Datetime Date of last modification
+    //  *
+    //  * @ORM\Column(name="updated", type="datetime")
+    //  */
+    // private $updated;
 
     public function __construct()
     {
         $this->boardgame = new ArrayCollection();
-        $this->created = new \DateTime();
-        $this->updated = new \DateTime();
+        // $this->created = new \DateTime();
+        // $this->updated = new \DateTime();
 
     }
 
@@ -142,38 +142,5 @@ class Reserve
         $this->player = $player;
 
         return $this;
-    }
-
-    /**
-     * @return \Datetime
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-        /**
-     * @param \Datetime $created
-     */
-    public function setCreated(Datetime $created)
-    {
-        $this->created = $created;
-    }
-
-
-    /**
-     * @return \Datetime
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
-    }
-
-        /**
-     * @param \Datetime $updated
-     */
-    public function setUpdated(Datetime $updated)
-    {
-        $this->updated = $updated;
     }
 }

@@ -22,21 +22,24 @@ class AppFixtures extends Fixture
         
     }
 
+    private static function reserveDataGenerator()
+    {
+        yield ["Orteaux", "C'est la famille"];
+        yield ["CJ", "La réserve de jeu du CJ"];
+    }
 
     public function load(ObjectManager $manager)
     {
 
         $reserveRepo = $manager->getRepository(Reserve::class);
 
-        $reserve = new Reserve();
-        $reserve->setName("CJ");
-        $reserve->setDescription("La réserve du CJ à la Maisel");
-        // $reserve->setCreated("");
-        // $reserve->setUpdated("");
-        $manager->persist($reserve);
-
-
-
+        foreach (self::reserveDataGenerator() as [$name, $description] ) {
+            $reserve = new Reserve();
+            $reserve->setName($name);
+            $reserve->setDescription($description);
+            $manager->persist($reserve);          
+        }
+    
 
         $boardgameRepo = $manager->getRepository(Boardgame::class);
 
