@@ -17,8 +17,9 @@ class AppFixtures extends Fixture
      */
     private static function boardgameDataGenerator()
     {
-        yield ["Inis", "strategy", 3, 1998];
-        yield ["Shadow Hunters", "social", 2, 2010];
+        yield ["Inis", "strategy", 3, 1998, 1];
+        yield ["Shadow Hunters", "social", 2, 2010, 1];
+        yield ["Flamme rouge", "strategy", 2, 2016, 2];
         
     }
 
@@ -30,25 +31,26 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-
-        $reserveRepo = $manager->getRepository(Reserve::class);
-
         foreach (self::reserveDataGenerator() as [$name, $description] ) {
             $reserve = new Reserve();
             $reserve->setName($name);
             $reserve->setDescription($description);
+            // $reserve->setId($id);
             $manager->persist($reserve);          
         }
+        $manager->flush();
     
+        $reserveRepo = $manager->getRepository(Reserve::class);
 
-        $boardgameRepo = $manager->getRepository(Boardgame::class);
+        // $boardgameRepo = $manager->getRepository(Boardgame::class);
 
-        foreach (self::boardgameDataGenerator() as [$name, $type, $difficulty, $year] ) {
+        foreach (self::boardgameDataGenerator() as [$name, $type, $difficulty, $year, $reserve_id] ) {
             $boardgame = new Boardgame();
             $boardgame->setName($name);
             $boardgame->setType($type);
             $boardgame->setDifficulty($difficulty);
             $boardgame->setYear($year);
+            $reserve = $reserveRepo->find($reserve_id);
             $boardgame->setReserve($reserve);
             $manager->persist($boardgame);          
         }

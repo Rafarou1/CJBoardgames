@@ -79,7 +79,6 @@ class ReserveController extends AbstractController
  * 
  * @Route("/reserve/{id}", name="reserve_show", requirements={"id"="\d+"})
  *    note that the id must be an integer, above
- * @Route("/index", name="reserve_index", methods="GET")
  *    
  * @param Integer $id
  */
@@ -101,20 +100,18 @@ class ReserveController extends AbstractController
          </head>
          <body>
              <h1>Jeu de sociétés</h1>
-             <p>Voici les jeux contenus dans cette réserve:</p>
-             <ul>';
+             <p>Voici les jeux contenus dans la réserve '.$reserve->getName().':</p>
+             <ul><dl>';
+
+            foreach($reserve->getBoardgame() as $boardgame) {
+                $res .= '<dd>' . $boardgame->getName() . ', ' . $boardgame->getType() . ', ' . $boardgame->getDifficulty() . ', ' . $boardgame->getYear() . '</dd>';
+            }
+
+        $res .= '</dl>';
+        $res .= '</ul></body></html>';
 
 
-        $entityManager= $doctrine->getManager();
-        $boardgames = $entityManager->getRepository(Boardgame::class)->findAll();
-        foreach($boardgames as $boardgame) {
-            $res .= '<li>
-            <a href="/boardgame/'.$boardgame->getid().'">'.$boardgame->getName().'</a></li>';
-
-      }
-
-
-        $res .= '<p/><a href="' . $this->generateUrl('reserve_index') . '">Back</a>';
+        $res .= '<p/><a href="' . $this->generateUrl('app_reserve') . '">Back</a>';
 
         return new Response('<html><body>'. $res . '</body></html>');
 }
