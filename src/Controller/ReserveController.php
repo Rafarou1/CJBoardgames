@@ -99,12 +99,12 @@ class ReserveController extends AbstractController
              <title>Boardgames</title>
          </head>
          <body>
-             <h1>Jeu de sociétés</h1>
-             <p>Voici les jeux contenus dans la réserve '.$reserve->getName().':</p>
+             <h1>Jeux de société</h1>
+             <p>Voici les jeux contenus dans la réserve '. '<Strong>' . $reserve->getName() . '</Strong>' . ':</p>
              <ul><dl>';
 
             foreach($reserve->getBoardgame() as $boardgame) {
-                $res .= '<dd>' . $boardgame->getName() . ', ' . $boardgame->getType() . ', ' . $boardgame->getDifficulty() . ', ' . $boardgame->getYear() . '</dd>';
+                $res .= '<dd>' . '<Strong>' . $boardgame->getName() .'</Strong>'. ', ' . $boardgame->getType() . ', difficulté ' . $boardgame->getDifficulty() . ', sorti en' . $boardgame->getYear() . '</dd>';
             }
 
         $res .= '</dl>';

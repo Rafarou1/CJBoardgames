@@ -25,8 +25,8 @@ class AppFixtures extends Fixture
 
     private static function reserveDataGenerator()
     {
-        yield ["Orteaux", "C'est la famille"];
         yield ["CJ", "La réserve de jeu du CJ"];
+        yield ["Orteaux", "C'est la famille"];
     }
 
     public function load(ObjectManager $manager)
