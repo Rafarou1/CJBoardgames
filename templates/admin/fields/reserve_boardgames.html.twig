@@ -1,0 +1,19 @@
+{# source: https://stackoverflow.com/a/65082524/1814910 #}
+  <ul>
+{% for boardgame in field.value %}
+  {%- set url = ea_url()
+    .setController('App\\Controller\\Admin\\boardgameCrudController')
+    .setAction('detail')
+    .setEntityId(boardgame.id)
+  -%}
+  <li>
+  	<a href="{{ url }}">
+        {{ boardgame }}
+  	</a>
+  </li>
+{% else %}
+</ul>  
+  <span class="badge badge-secondary">None</span>
+  <ul>
+{% endfor %}
+  </ul>

@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Boardgame;
 use App\Entity\Reserve;
-use App\Controller\Actions;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -69,14 +68,6 @@ class ReserveController extends AbstractController
     ]
     );
 }
-
-// public function configureActions(Actions $actions): Actions
-//     {
-
-//     return $actions
-//         ->add(Crud::PAGE_INDEX, Action::DETAIL)
-//     ;
-//     }
 
 
 }
