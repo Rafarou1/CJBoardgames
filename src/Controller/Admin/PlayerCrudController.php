@@ -2,19 +2,18 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Reserve;
+use App\Entity\Player;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class ReserveCrudController extends AbstractCrudController
+class PlayerCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Reserve::class;
+        return Player::class;
     }
-
 
     public function configureFields(string $pageName): iterable
     {
@@ -23,7 +22,7 @@ class ReserveCrudController extends AbstractCrudController
             TextField::new('name')
             ->setRequired(true),
             TextField::new('description'),
-            AssociationField::new('boardgame')->onlyOnDetail(),
+            AssociationField::new('reserve')->onlyOnDetail(),
         ];
     }
 }

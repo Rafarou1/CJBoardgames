@@ -4,9 +4,11 @@ namespace App\DataFixtures;
 
 use App\Entity\Boardgame;
 use App\Entity\Reserve;
+use App\Entity\Player;
 use App\Repository\BoardgameRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+
 
 
 class AppFixtures extends Fixture
@@ -29,13 +31,17 @@ class AppFixtures extends Fixture
         yield ["Orteaux", "C'est la famille"];
     }
 
+    private static function playerDataGenerator()
+    {
+        yield ["Rafaël", "Respo jeu de société du CJ", 1];
+    }
+
     public function load(ObjectManager $manager)
     {
         foreach (self::reserveDataGenerator() as [$name, $description] ) {
             $reserve = new Reserve();
             $reserve->setName($name);
             $reserve->setDescription($description);
-            // $reserve->setId($id);
             $manager->persist($reserve);          
         }
         $manager->flush();
@@ -53,6 +59,16 @@ class AppFixtures extends Fixture
             $reserve = $reserveRepo->find($reserve_id);
             $boardgame->setReserve($reserve);
             $manager->persist($boardgame);          
+        }
+        $manager->flush();
+
+        foreach (self::playerDataGenerator() as [$name, $description, $reserve_id] ) {
+            $player = new Player();
+            $player->setName($name);
+            $player->setDescription($description);
+            $reserve = $reserveRepo->find($reserve_id);
+            $player->setReserve($reserve);
+            $manager->persist($player);          
         }
         $manager->flush();
 

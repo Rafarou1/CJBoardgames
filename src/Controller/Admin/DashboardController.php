@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Boardgame;
+use App\Entity\Player;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -36,5 +37,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Reserves', 'fas fa-list', Reserve::class);
         yield MenuItem::linkToCrud('Boardgames', 'fas fa-list', Boardgame::class);
+        yield MenuItem::linkToCrud('Player', 'fas fa-list', Player::class);
     }
 }
