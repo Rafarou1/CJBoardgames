@@ -1,20 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReserveController!{% endblock %}
+{% block title %}Welcome!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h1>Reserve index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<ul>
+  {% for boardgame in reserves %}
+  <table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Style</th>
+            <th>Difficulty</th>
+            <th>Year</th>
+        </tr>
+    </thead>
+    <tbody>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/rafarou/CSC4101/projet/CJBoardgames/src/Controller/ReserveController.php'|file_link(0) }}">src/Controller/ReserveController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/rafarou/CSC4101/projet/CJBoardgames/templates/reserve/index.html.twig'|file_link(0) }}">templates/reserve/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+        <tr>
+            <td>{{boardgame.id}}</td>
+            <td>{{boardgame.name}}</td>
+            <td>{{boardgame.style}}</td>
+            <td>{{boardgame.difficulty}}</td>
+            <td>{{boardgame.year}}</td>
+        </tr>
+
+    </tbody>
+    <thead>
+  <tr>
+    ...
+    <th> &nbsp;</th>
+  </tr>
+</thead>
+<tbody>
+  ...
+  <tr>
+    ...
+    <td><a href="{{ path('reserve_show', {'id': reserve.id}) }}">show</a></td>
+  </tr>
+</tbody>
+
+</table>
+  {% endfor %} {# reserves #}
+</ul>
+
+{% endblock %} {# body #}

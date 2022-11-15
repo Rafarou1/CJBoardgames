@@ -21,20 +21,24 @@ class ReserveController extends AbstractController
      */
     public function index(): Response
     {
-        return new Response(
-            '<html>
-    <body> Bienvenue dans notre réserve !
-        <ul>
-            <li>Jetez un oeil aux jeux présents dans les réserves</li>
-            <li>Demandez des précisions aux joueurs</li>
-        </ul>
-    </body>
-</html>'
+//         return new Response(
+//             '<html>
+//     <body> Bienvenue dans notre réserve !
+//         <ul>
+//             <li>Jetez un oeil aux jeux présents dans les réserves</li>
+//             <li>Demandez des précisions aux joueurs</li>
+//         </ul>
+//     </body>
+// </html>'
 
+//     );
+//     return $this->render('reserve/index.html.twig', [
+//         'controller_name' => 'ReserveController',
+//     ]);
+
+    return $this->render('index.html.twig',
+        [ 'welcome' => "Accueil des réserves" ]
     );
-    return $this->render('reserve/index.html.twig', [
-        'controller_name' => 'ReserveController',
-    ]);
     }
 
 
@@ -43,35 +47,44 @@ class ReserveController extends AbstractController
      *
      * @Route("/reserve", name = "app_reserve", methods="GET")
      */
-    public function listAction(ManagerRegistry $doctrine)
+    public function listAction(ManagerRegistry $doctrine): Response
     {
-        $htmlpage = '<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Réserves</title>
-    </head>
-    <body>
-        <h1>Réserves</h1>
-        <p>Voici les reserves partagées sur notre site:</p>
-        <ul>';
+//         $htmlpage = '<!DOCTYPE html>
+// <html>
+//     <head>
+//         <meta charset="UTF-8">
+//         <title>Réserves</title>
+//     </head>
+//     <body>
+//         <h1>Réserves</h1>
+//         <p>Voici les reserves partagées sur notre site:</p>
+//         <ul>';
         
-        $entityManager= $doctrine->getManager();
-        $reserves = $entityManager->getRepository(Reserve::class)->findAll();
-        foreach($reserves as $reserve) {
-           $htmlpage .= '<li>
-            <a href="/reserve/'.$reserve->getid().'">'.$reserve->getName().'</a></li>';
-         }
+//         $entityManager= $doctrine->getManager();
+//         $reserves = $entityManager->getRepository(Reserve::class)->findAll();
+//         foreach($reserves as $reserve) {
+//            $htmlpage .= '<li>
+//             <a href="/reserve/'.$reserve->getid().'">'.$reserve->getName().'</a></li>';
+//          }
 
-        $htmlpage .= '</ul>';
+//         $htmlpage .= '</ul>';
 
-        $htmlpage .= '</body></html>';
+//         $htmlpage .= '</body></html>';
         
-        return new Response(
-            $htmlpage,
-            Response::HTTP_OK,
-            array('content-type' => 'text/html')
-            );
+//         return new Response(
+//             $htmlpage,
+//             Response::HTTP_OK,
+//             array('content-type' => 'text/html')
+//             );
+    $entityManager= $doctrine->getManager();
+    $reserves = $entityManager->getRepository(Reserve::class)->findAll();
+
+    dump($reserves);
+
+    return $this->render('reserve/index.html.twig',
+        [ 'reserves' => $reserves ]
+        );
+
     }
 
     /**
@@ -82,38 +95,42 @@ class ReserveController extends AbstractController
  *    
  * @param Integer $id
  */
-    public function show(ManagerRegistry $doctrine, $id)
+    public function showAction(Reserve $reserve): Response
 {
        
-        $reserveRepo = $doctrine->getRepository(reserve::class);
-        $reserve = $reserveRepo->find($id);
+    //     $reserveRepo = $doctrine->getRepository(reserve::class);
+    //     $reserve = $reserveRepo->find($id);
 
-        if (!$reserve) {
-          throw $this->createNotFoundException('The reserve does not exist');
-     }
+    //     if (!$reserve) {
+    //       throw $this->createNotFoundException('The reserve does not exist');
+    //  }
 
-        $res = '<!DOCTYPE html>
-        <html>
-         <head>
-             <meta charset="UTF-8">
-             <title>Boardgames</title>
-         </head>
-         <body>
-             <h1>Jeux de société</h1>
-             <p>Voici les jeux contenus dans la réserve '. '<Strong>' . $reserve->getName() . '</Strong>' . ':</p>
-             <ul><dl>';
+    //     $res = '<!DOCTYPE html>
+    //     <html>
+    //      <head>
+    //          <meta charset="UTF-8">
+    //          <title>Boardgames</title>
+    //      </head>
+    //      <body>
+    //          <h1>Jeux de société</h1>
+    //          <p>Voici les jeux contenus dans la réserve '. '<Strong>' . $reserve->getName() . '</Strong>' . ':</p>
+    //          <ul><dl>';
 
-            foreach($reserve->getBoardgame() as $boardgame) {
-                $res .= '<dd>' . '<Strong>' . $boardgame->getName() .'</Strong>'. ', ' . $boardgame->getType() . ', difficulté ' . $boardgame->getDifficulty() . ', sorti en' . $boardgame->getYear() . '</dd>';
-            }
+    //         foreach($reserve->getBoardgame() as $boardgame) {
+    //             $res .= '<dd>' . '<Strong>' . $boardgame->getName() .'</Strong>'. ', ' . $boardgame->getType() . ', difficulté ' . $boardgame->getDifficulty() . ', sorti en' . $boardgame->getYear() . '</dd>';
+    //         }
 
-        $res .= '</dl>';
-        $res .= '</ul></body></html>';
+    //     $res .= '</dl>';
+    //     $res .= '</ul></body></html>';
 
 
-        $res .= '<p/><a href="' . $this->generateUrl('app_reserve') . '">Back</a>';
+    //     $res .= '<p/><a href="' . $this->generateUrl('app_reserve') . '">Back</a>';
 
-        return new Response('<html><body>'. $res . '</body></html>');
+    //     return new Response('<html><body>'. $res . '</body></html>');
+
+    return $this->render('reserve/show.html.twig',
+    [ 'reserve' => $reserve ]
+    );
 }
 
 

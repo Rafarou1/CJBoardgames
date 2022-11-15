@@ -26,7 +26,7 @@ class Boardgame
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $type;
+    private $style;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -61,14 +61,14 @@ class Boardgame
         return $this;
     }
 
-    public function getType(): ?string
+    public function getStyle(): ?string
     {
-        return $this->type;
+        return $this->style;
     }
 
-    public function setType(string $type): self
+    public function setStyle(string $style): self
     {
-        $this->type = $type;
+        $this->style = $style;
 
         return $this;
     }

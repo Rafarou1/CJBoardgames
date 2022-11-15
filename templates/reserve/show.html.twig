@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome!{% endblock %}
+
+{% block body %}
+      <h1>Reserve</h1>
+
+         {% dump reserve %}
+
+      <table class="table">
+          <tbody>
+              <tr>
+                  <th>Id</th>
+                  <td>{{ reserve.id }}</td>
+              </tr>
+              <tr>
+                  <th>Reserve</th>
+                  <td>{{ reserve.name }}</td>
+              </tr>
+              ...
+          </tbody>
+      </table>
+
+      <a href="{{ path('app_reserve') }}">back to list</a>
+
+  {% endblock %}
+{# ... #} 
