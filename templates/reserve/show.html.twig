@@ -3,25 +3,42 @@
 {% block title %}Welcome!{% endblock %}
 
 {% block body %}
-      <h1>Reserve</h1>
+<h1>Contenu de la réserve {{ reserve.name }} : </h1>
 
-         {% dump reserve %}
+<ul>
+  {% for boardgame in boardgames %}
+  <table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Style</th>
+            <th>Difficulty</th>
+            <th>Year</th>
+        </tr>
+    </thead>
+    <tbody>
 
-      <table class="table">
-          <tbody>
-              <tr>
-                  <th>Id</th>
-                  <td>{{ reserve.id }}</td>
-              </tr>
-              <tr>
-                  <th>Reserve</th>
-                  <td>{{ reserve.name }}</td>
-              </tr>
-              ...
-          </tbody>
-      </table>
+        <tr>
+            <td>{{boardgame.id}}</td>
+            <td>{{boardgame.name}}</td>
+            <td>{{boardgame.style}}</td>
+            <td>{{boardgame.difficulty}}</td>
+            <td>{{boardgame.year}}</td>
+        </tr>
 
-      <a href="{{ path('app_reserve') }}">back to list</a>
+    </tbody>
+    <thead>
+  <tr>
 
-  {% endblock %}
-{# ... #} 
+    <th> &nbsp;</th>
+  </tr>
+</thead>
+
+</table>
+  {% endfor %} {# reserves #}
+</ul>
+
+<a href="{{ path('app_reserve') }}">Retour à la liste de réserves</a>
+
+{% endblock %} {# body #}
