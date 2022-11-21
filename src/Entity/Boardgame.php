@@ -24,11 +24,6 @@ class Boardgame
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $style;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $difficulty;
@@ -44,6 +39,11 @@ class Boardgame
      */
     private $reserve;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $gameClass;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -57,18 +57,6 @@ class Boardgame
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getStyle(): ?string
-    {
-        return $this->style;
-    }
-
-    public function setStyle(string $style): self
-    {
-        $this->style = $style;
 
         return $this;
     }
@@ -112,5 +100,17 @@ class Boardgame
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getGameClass(): ?string
+    {
+        return $this->gameClass;
+    }
+
+    public function setGameClass(string $gameClass): self
+    {
+        $this->gameClass = $gameClass;
+
+        return $this;
     }
 }

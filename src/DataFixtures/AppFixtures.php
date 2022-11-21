@@ -3,9 +3,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\Boardgame;
+use App\Entity\GameClass;
 use App\Entity\Reserve;
 use App\Entity\Player;
-use App\Repository\BoardgameRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -19,9 +19,9 @@ class AppFixtures extends Fixture
      */
     private static function boardgameDataGenerator()
     {
-        yield ["Inis", "strategy", 3, 1998, 1];
-        yield ["Shadow Hunters", "social", 2, 2010, 1];
-        yield ["Flamme rouge", "strategy", 2, 2016, 2];
+        yield ["Inis", "space games", 3, 1998, 1];
+        yield ["Shadow Hunters", "chase games", 2, 2010, 1];
+        yield ["Flamme rouge", "race games", 2, 2016, 2];
         
     }
 
@@ -36,6 +36,14 @@ class AppFixtures extends Fixture
         yield ["Rafaël", "Respo jeu de société du CJ", 1];
     }
 
+    private static function gameClassDataGenerator()
+    {
+        yield ["race games", "be the first to move all one's pieces to the final destination"];
+        yield ["space games", "arrange the pieces into some special configuration"];
+        yield ["chase games", "players start the game with different sets of pieces and objectives"];
+        yield ["displace games", "the main objective is the capture the opponents' pieces"];
+    }
+
     public function load(ObjectManager $manager)
     {
         foreach (self::reserveDataGenerator() as [$name, $description] ) {
@@ -48,12 +56,10 @@ class AppFixtures extends Fixture
     
         $reserveRepo = $manager->getRepository(Reserve::class);
 
-        // $boardgameRepo = $manager->getRepository(Boardgame::class);
-
-        foreach (self::boardgameDataGenerator() as [$name, $style, $difficulty, $year, $reserve_id] ) {
+        foreach (self::boardgameDataGenerator() as [$name, $gameClass, $difficulty, $year, $reserve_id] ) {
             $boardgame = new Boardgame();
             $boardgame->setName($name);
-            $boardgame->setStyle($style);
+            $boardgame->setGameClass($gameClass);
             $boardgame->setDifficulty($difficulty);
             $boardgame->setYear($year);
             $reserve = $reserveRepo->find($reserve_id);
@@ -69,6 +75,14 @@ class AppFixtures extends Fixture
             $reserve = $reserveRepo->find($reserve_id);
             $player->setReserve($reserve);
             $manager->persist($player);          
+        }
+        $manager->flush();
+
+        foreach (self::gameClassDataGenerator() as [$name, $description] ) {
+            $gameClass = new GameClass();
+            $gameClass->setName($name);
+            $gameClass->setDescription($description);
+            $manager->persist($gameClass);
         }
         $manager->flush();
 
