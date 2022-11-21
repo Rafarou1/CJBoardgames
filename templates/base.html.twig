@@ -16,7 +16,7 @@
             <!-- Navigation -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container">
-                <a class="navbar-brand" href="{{ path('app_reserve') }}">ToDo</a>
+                <a class="navbar-brand" href="{{ path('app_reserve') }}">Base de données de jeux de société</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -26,7 +26,7 @@
                 </div>
             </nav>
         {% endblock %}{# menu #}
-        {% block body %}
+        {% block main %}
         {% block javascripts %}
             <!-- Bootstrap core JS-->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -34,6 +34,6 @@
             <script src="{{ asset('js/scripts.js', 'startbootstrap') }}"></script>
         {% endblock %} {# javascripts #}
         
-        {% endblock %}{# body #}
+        {% endblock %}{# main #}
     </body>
 </html>

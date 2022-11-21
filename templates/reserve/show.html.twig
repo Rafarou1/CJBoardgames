@@ -2,7 +2,7 @@
 
 {% block title %}Welcome!{% endblock %}
 
-{% block body %}
+{% block main %}
 <h1>Contenu de la réserve {{ reserve.name }} : </h1>
 
 <ul>
@@ -12,7 +12,6 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>GameClass</th>
             <th>Difficulty</th>
             <th>Year</th>
         </tr>
@@ -22,7 +21,6 @@
         <tr>
             <td>{{boardgame.id}}</td>
             <td>{{boardgame.name}}</td>
-            <td>{{boardgame.gameClass}}</td>
             <td>{{boardgame.difficulty}}</td>
             <td>{{boardgame.year}}</td>
         </tr>
@@ -41,4 +39,4 @@
 
 <a href="{{ path('app_reserve') }}">Retour à la liste de réserves</a>
 
-{% endblock %} {# body #}
+{% endblock %} {# main #}

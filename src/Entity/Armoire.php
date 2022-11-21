@@ -27,7 +27,7 @@ class Armoire
     /**
      * @ORM\Column(type="boolean")
      */
-    private $publiée;
+    private $published;
 
     /**
      * @ORM\OneToOne(targetEntity=Player::class, cascade={"persist", "remove"})
@@ -61,14 +61,14 @@ class Armoire
         return $this;
     }
 
-    public function isPubliée(): ?bool
+    public function isPublished(): ?bool
     {
-        return $this->publiée;
+        return $this->published;
     }
 
-    public function setPubliée(bool $publiée): self
+    public function setPublished(bool $published): self
     {
-        $this->publiée = $publiée;
+        $this->published = $published;
 
         return $this;
     }
@@ -107,5 +107,10 @@ class Armoire
         $this->boardgame->removeElement($boardgame);
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
