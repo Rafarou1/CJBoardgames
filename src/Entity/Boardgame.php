@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\BoardgameRepository;
 use App\Entity\Reserve;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,9 +42,21 @@ class Boardgame
     private $reserve;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToMany(targetEntity=GameClass::class, inversedBy="boardgames")
      */
     private $gameClass;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Armoire::class, mappedBy="boardgame")
+     */
+    private $armoires;
+
+    public function __construct()
+    {
+        $this->gameClass = new ArrayCollection();
+        $this->armoires = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -102,15 +116,55 @@ class Boardgame
         return $this->name;
     }
 
-    public function getGameClass(): ?string
+    /**
+     * @return Collection<int, GameClass>
+     */
+    public function getGameClass(): Collection
     {
         return $this->gameClass;
     }
 
-    public function setGameClass(string $gameClass): self
+    public function addGameClass(GameClass $gameClass): self
     {
-        $this->gameClass = $gameClass;
+        if (!$this->gameClass->contains($gameClass)) {
+            $this->gameClass[] = $gameClass;
+        }
 
         return $this;
     }
+
+    public function removeGameClass(GameClass $gameClass): self
+    {
+        $this->gameClass->removeElement($gameClass);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Armoire>
+     */
+    public function getArmoires(): Collection
+    {
+        return $this->armoires;
+    }
+
+    public function addArmoire(Armoire $armoire): self
+    {
+        if (!$this->armoires->contains($armoire)) {
+            $this->armoires[] = $armoire;
+            $armoire->addBoardgame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArmoire(Armoire $armoire): self
+    {
+        if ($this->armoires->removeElement($armoire)) {
+            $armoire->removeBoardgame($this);
+        }
+
+        return $this;
+    }
+
 }

@@ -39,9 +39,15 @@ class GameClass
      */
     private $subClass;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Boardgame::class, mappedBy="gameClass")
+     */
+    private $boardgames;
+
     public function __construct()
     {
         $this->subClass = new ArrayCollection();
+        $this->boardgames = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,6 +116,33 @@ class GameClass
             if ($subClass->getParent() === $this) {
                 $subClass->setParent(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Boardgame>
+     */
+    public function getBoardgames(): Collection
+    {
+        return $this->boardgames;
+    }
+
+    public function addBoardgame(Boardgame $boardgame): self
+    {
+        if (!$this->boardgames->contains($boardgame)) {
+            $this->boardgames[] = $boardgame;
+            $boardgame->addGameClass($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBoardgame(Boardgame $boardgame): self
+    {
+        if ($this->boardgames->removeElement($boardgame)) {
+            $boardgame->removeGameClass($this);
         }
 
         return $this;

@@ -29,7 +29,7 @@ class BoardgameCrudController extends AbstractCrudController
             IntegerField::new('year'),
             AssociationField::new('reserve'),
             AssociationField::new('gameClass')
-                ->onlyOnDetail()
+                // ->onlyOnDetail()
                 ->formatValue(function ($value, $entity) {
                     return implode(', ', $entity->getGameClass()->toArray());
         })

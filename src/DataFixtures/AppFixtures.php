@@ -55,11 +55,13 @@ class AppFixtures extends Fixture
         $manager->flush();
     
         $reserveRepo = $manager->getRepository(Reserve::class);
+        $gameClassRepo = $manager->getRepository(GameClass::class);
 
-        foreach (self::boardgameDataGenerator() as [$name, $gameClass, $difficulty, $year, $reserve_id] ) {
+        foreach (self::boardgameDataGenerator() as [$name, $gameClass_name, $difficulty, $year, $reserve_id] ) {
             $boardgame = new Boardgame();
             $boardgame->setName($name);
-            $boardgame->setGameClass($gameClass);
+            $gameClass = $gameClassRepo->find($gameClass_name);
+            $boardgame->getGameClass($gameClass);
             $boardgame->setDifficulty($difficulty);
             $boardgame->setYear($year);
             $reserve = $reserveRepo->find($reserve_id);
