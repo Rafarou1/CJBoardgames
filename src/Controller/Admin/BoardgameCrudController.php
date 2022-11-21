@@ -24,10 +24,15 @@ class BoardgameCrudController extends AbstractCrudController
         return [
             TextField::new('name')
                 ->setRequired(true),
-            TextField::new('type'),
+            // TextField::new('gameClass'),
             IntegerField::new('difficulty'),
             IntegerField::new('year'),
             AssociationField::new('reserve'),
+            AssociationField::new('gameClass')
+                ->onlyOnDetail()
+                ->formatValue(function ($value, $entity) {
+                    return implode(', ', $entity->getGameClass()->toArray());
+        })
         ];
     }
     
