@@ -5,3 +5,10 @@ bootstrap_menu:
         reserves:
           label: 'Réserves'
           route: 'app_reserve'
+        players:
+          label: 'Joueurs'
+          route: 'app_player_index'  
+        armoires:
+          label: 'Armoires'
+          route: 'app_armoire_index'
+
